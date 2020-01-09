@@ -37,6 +37,10 @@ module.exports = {
       },
       location: {
         allowNull: false,
+        type: Sequelize.JSON
+      },
+      photo_url: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

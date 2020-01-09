@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
         id_city: DataTypes.INTEGER,
         public_place: DataTypes.STRING,
         neighborhood: DataTypes.STRING,
-        number: DataTypes.STRING,
-        zipcode: DataTypes.STRING
+        number: DataTypes.INTEGER,
+        zipcode: DataTypes.INTEGER
     }, {});
     address.associate = function (models) {
         // Endereço tem um cidade

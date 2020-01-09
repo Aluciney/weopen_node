@@ -1,4 +1,7 @@
 'use strict';
+
+const sequelizePaginate = require('sequelize-paginate');
+
 module.exports = (sequelize, DataTypes) => {
     const company = sequelize.define('company', {
         id_address: DataTypes.INTEGER,
@@ -7,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
         open_time: DataTypes.TIME,
         close_time: DataTypes.TIME,
         opening_status: DataTypes.ENUM('O', 'C', 'P'),
-        location: DataTypes.STRING
+        location: DataTypes.JSON,
+        photo_url: DataTypes.STRING
     }, {});
     company.associate = function (models) {
         // Companhia tem um endereço
@@ -15,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'id_address'
         });
     };
+
+    sequelizePaginate.paginate(company);
 
     return company;
 };

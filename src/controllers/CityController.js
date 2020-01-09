@@ -12,44 +12,41 @@ module.exports = {
         return res.send();
     },
 
-    // async show(req, res) {
-    //     const _user = await user.findByPk(req.params.id);
-    //     if (_user != null) {
-    //         return res.status(200).json(_user);
-    //     } else {
-    //         return res.status(404).json({ erroMessage: `Usuário não encontrado!` });
-    //     }
-    // },
+    async show(req, res) {
+        const cities = await city.findByPk(req.params.id);
+        if (cities === null) {
+            return res.status(404).json({ erroMessage: `Cidade não encontrado!` });
+        }
+        return res.status(200).json(cities);
+    },
 
-    // async store(req, res) {
-    //     try {
-    //         const _user = await user.create(req.body);
-    //         var token = jwt.sign({ id: _user.id }, process.env.JWT_SECRET_KEY);
-    //         res.status(200).json({ auth: true, user: _user, token: token });
-    //     } catch (error) {
-    //         return res.status(404).json({ erroMessage: `Erro ao cadastrar usuario. Erro: ${error}` });
-    //     }
-    // },
+    async store(req, res) {
+        try {
+            const cities = await city.create(req.body);
+            return res.status(201).json(cities);
+        } catch (error) {
+            return res.status(404).json({ erroMessage: `Erro ao cadastrar cidade. Erro: ${error}` });
+        }
+    },
 
-    // async update(req, res) {
-    //     try {
-    //         const _user = await user.update(req.body, { where: { id: req.userId } });
-    //         if (_user > 0) {
-    //             return res.json(await user.findByPk(req.userId));
-    //         }
-    //         return res.status(404).json({ erroMessage: `Erro ao atualizar usuario.` });
-    //     } catch (error) {
-    //         return res.status(404).json({ erroMessage: `Erro ao atualizar usuario. Erro: ${error}` });
-    //     }
-    // },
+    async update(req, res) {
+        try {
+            const cities = await city.update(req.body, { where: { id: req.params.id } });
+            if (cities > 0) {
+                return res.json(await city.findByPk(req.params.id));
+            }
+            return res.status(404).json({ erroMessage: `Erro ao atualizar cidade.` });
+        } catch (error) {
+            return res.status(404).json({ erroMessage: `Erro ao atualizar cidade. Erro: ${error}` });
+        }
+    },
 
-    // async destroy(req, res) {
-    //     try {
-    //         const _user = await user.findByPk(req.userId);
-    //         await user.destroy({ where: { id: req.userId } });
-    //         return res.send();
-    //     } catch (error) {
-    //         return res.status(404).json({ erroMessage: `Erro ao deletar usuario. Erro: ${error}` });
-    //     }
-    // }
+    async destroy(req, res) {
+        try {
+            const cities = await city.destroy({ where: { id: req.params.id } });
+            return res.send();
+        } catch (error) {
+            return res.status(404).json({ erroMessage: `Erro ao deletar cidade. Erro: ${error}` });
+        }
+    }
 };
