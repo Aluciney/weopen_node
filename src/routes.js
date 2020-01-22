@@ -8,7 +8,7 @@ const StateController = require('./controllers/StateController');
 const UserController = require('./controllers/UserController');
 const LocationController = require('./controllers/LocationController');
 const PublicChatController = require('./controllers/PublicChatController');
-const MessageController = require('./controllers/MessageController');
+const AuthenticationController = require('./controllers/AuthenticationController');
 
 // ADDRESS
 routes.get('/addresses', AddressController.index);
@@ -52,9 +52,9 @@ routes.post('/users', UserController.store);
 routes.put('/users/:id', UserController.update);
 routes.delete('/users/:id', UserController.destroy);
 
-// MESSAGE
-routes.get('/messages/:id_public_chat', MessageController.show);
-routes.post('/messages', MessageController.store);
+// authentication
+routes.post('/authentication/login', AuthenticationController.login);
+routes.post('/authentication/register', AuthenticationController.register);
 
 
 routes.get('/location', LocationController.show);

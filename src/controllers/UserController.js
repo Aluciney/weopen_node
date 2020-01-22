@@ -1,5 +1,5 @@
 const { user } = require('../app/models');
-
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -19,9 +19,20 @@ module.exports = {
 
     async store(req, res) {
         try {
-            const _user = await user.create(req.body);
+            const { name, birthday_date, email, password, phone_number } = req.body;
+            var password_hash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+
+            const _user = await user.create({
+                name, 
+                birthday_date, 
+                email, 
+                password_hash, 
+                phone_number
+            });
+
             var token = jwt.sign({ id: _user.id }, process.env.JWT_SECRET_KEY);
-            return res.status(201).json({ auth: true, user: _user, token: token });
+
+            return res.status(201).json({ user: _user, token: token });
         } catch (error) {
             return res.status(404).json({ erroMessage: `Erro ao cadastrar usuario. Erro: ${error}` });
         }

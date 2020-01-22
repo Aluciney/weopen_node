@@ -28,8 +28,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(11)
       },
-      image: {
-        allowNull: false,
+      avatar_url: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: {
