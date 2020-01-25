@@ -1,4 +1,5 @@
 const routes = require('express').Router();
+const authMiddleware = require('./middlewares/auth');
 
 const AddressController = require('./controllers/AddressController');
 const CityController = require('./controllers/CityController');
@@ -11,6 +12,7 @@ const PublicChatController = require('./controllers/PublicChatController');
 const AuthenticationController = require('./controllers/AuthenticationController');
 
 // ADDRESS
+routes.use('/addresses', [ authMiddleware ]);
 routes.get('/addresses', AddressController.index);
 routes.get('/addresses/:id', AddressController.show);
 routes.post('/addresses', AddressController.store);
@@ -60,7 +62,5 @@ routes.post('/authentication/register', AuthenticationController.register);
 routes.get('/location', LocationController.show);
 
 routes.get('/public_chat/:id', PublicChatController.show);
-
-
 
 module.exports = routes;
