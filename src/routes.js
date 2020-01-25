@@ -20,6 +20,7 @@ routes.put('/addresses/:id', AddressController.update);
 routes.delete('/addresses/:id', AddressController.destroy);
 
 // CITY
+routes.use('/cities', [ authMiddleware ]);
 routes.get('/cities', CityController.index);
 routes.get('/cities/:id', CityController.show);
 routes.post('/cities', CityController.store);
@@ -27,6 +28,7 @@ routes.put('/cities/:id', CityController.update);
 routes.delete('/cities/:id', CityController.destroy);
 
 // COMPANY
+routes.use('/companies', [ authMiddleware ]);
 routes.get('/companies', CompanyController.index);
 routes.get('/companies/:id', CompanyController.show);
 routes.post('/companies', CompanyController.store);
@@ -34,6 +36,7 @@ routes.put('/companies/:id', CompanyController.update);
 routes.delete('/companies/:id', CompanyController.destroy);
 
 // COUNTRY
+routes.use('/countries', [ authMiddleware ]);
 routes.get('/countries', CountryController.index);
 routes.get('/countries/:id', CountryController.show);
 routes.post('/countries', CountryController.store);
@@ -41,6 +44,7 @@ routes.put('/countries/:id', CountryController.update);
 routes.delete('/countries/:id', CountryController.destroy);
 
 // STATE
+routes.use('/states', [ authMiddleware ]);
 routes.get('/states', StateController.index);
 routes.get('/states/:id', StateController.show);
 routes.post('/states', StateController.store);
@@ -59,8 +63,10 @@ routes.post('/authentication/login', AuthenticationController.login);
 routes.post('/authentication/register', AuthenticationController.register);
 
 
+routes.use('/location', [ authMiddleware ]);
 routes.get('/location', LocationController.show);
 
+routes.use('/public_chat', [ authMiddleware ]);
 routes.get('/public_chat/:id', PublicChatController.show);
 
 module.exports = routes;
