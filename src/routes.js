@@ -28,7 +28,7 @@ routes.put('/cities/:id', CityController.update);
 routes.delete('/cities/:id', CityController.destroy);
 
 // COMPANY
-routes.use('/companies', [ authMiddleware ]);
+// routes.use('/companies', [ authMiddleware ]);
 routes.get('/companies', CompanyController.index);
 routes.get('/companies/:id', CompanyController.show);
 routes.post('/companies', CompanyController.store);
@@ -60,6 +60,7 @@ routes.delete('/users/:id', UserController.destroy);
 
 // authentication
 routes.post('/authentication/login', AuthenticationController.login);
+routes.post('/authentication/login/google', AuthenticationController.login_google);
 routes.post('/authentication/register', AuthenticationController.register);
 
 

@@ -25,6 +25,23 @@ module.exports = {
         return res.status(200).json({ user: user_, token });
     },
 
+    async login_google(req, res) {
+        const { email } = req.body;
+        const user_ = await user.findOne({ 
+            where: { email },
+        });
+        
+        if(!user_){
+            return res.status(401).json({ errorMessage: 'E-mail não cadastrado' });
+        }
+
+        var token = jwt.sign({ 
+            id: user_.id 
+        }, process.env.JWT_SECRET_KEY);
+
+        return res.status(200).json({ user: user_, token });
+    },
+
     async register(req, res) {
         const { name, birthday_date, email, password, repeat_password, phone_number, avatar_url } = req.body;
 

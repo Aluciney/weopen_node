@@ -1,13 +1,17 @@
 const { company, address, public_chat } = require('../app/models');
 
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
+
 module.exports = {
     async index(req, res) {
-        const { page = 1 } = req.query;
+        const { page = 1, search = '' } = req.query;
         const companies = await company.paginate({
             include: [{
                 model: address,
                 as: 'address'
             }],
+            where: { fantasy_name: { [Op.like]: `%${search}%` }},
             page,
             paginate: 5,
         });

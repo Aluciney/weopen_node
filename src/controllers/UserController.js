@@ -12,29 +12,28 @@ module.exports = {
     async show(req, res) {
         const _user = await user.findByPk(req.params.id);
         if (_user === null) {
-            return res.status(404).json({ erroMessage: `Usuário não encontrado!` });
+            return res.status(404).json({ errorMessage: `Usuário não encontrado!` });
         }
         return res.status(200).json(_user);
     },
 
     async store(req, res) {
         try {
-            const { name, birthday_date, email, password, phone_number } = req.body;
+            const { name, email, password, avatar_url } = req.body;
             var password_hash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
             const _user = await user.create({
-                name, 
-                birthday_date, 
+                name,
                 email, 
                 password_hash, 
-                phone_number
+                avatar_url
             });
 
             var token = jwt.sign({ id: _user.id }, process.env.JWT_SECRET_KEY);
 
             return res.status(201).json({ user: _user, token: token });
         } catch (error) {
-            return res.status(404).json({ erroMessage: `Erro ao cadastrar usuario. Erro: ${error}` });
+            return res.status(404).json({ errorMessage: `Erro ao cadastrar usuario. Erro: ${error}` });
         }
     },
 
@@ -44,9 +43,9 @@ module.exports = {
             if (_user > 0) {
                 return res.json(await user.findByPk(req.userId));
             }
-            return res.status(404).json({ erroMessage: `Erro ao atualizar usuario.` });
+            return res.status(404).json({ errorMessage: `Erro ao atualizar usuario.` });
         } catch (error) {
-            return res.status(404).json({ erroMessage: `Erro ao atualizar usuario. Erro: ${error}` });
+            return res.status(404).json({ errorMessage: `Erro ao atualizar usuario. Erro: ${error}` });
         }
     },
 
@@ -56,7 +55,7 @@ module.exports = {
             await user.destroy({ where: { id: req.userId } });
             return res.send();
         } catch (error) {
-            return res.status(404).json({ erroMessage: `Erro ao deletar usuario. Erro: ${error}` });
+            return res.status(404).json({ errorMessage: `Erro ao deletar usuario. Erro: ${error}` });
         }
     }
 };
