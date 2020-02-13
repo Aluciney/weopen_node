@@ -39,11 +39,12 @@ module.exports = {
 
     async update(req, res) {
         try {
-            const _user = await user.update(req.body, { where: { id: req.userId } });
-            if (_user > 0) {
-                return res.json(await user.findByPk(req.userId));
+            const _user = await user.findByPk(req.res.userId);
+            if(_user){
+                _user.update(req.body);
+                return res.json(_user);
             }
-            return res.status(404).json({ errorMessage: `Erro ao atualizar usuario.` });
+            return res.status(404).json({ errorMessage: `Usuário não encontrado.` });
         } catch (error) {
             return res.status(404).json({ errorMessage: `Erro ao atualizar usuario. Erro: ${error}` });
         }
@@ -51,8 +52,8 @@ module.exports = {
 
     async destroy(req, res) {
         try {
-            const _user = await user.findByPk(req.userId);
-            await user.destroy({ where: { id: req.userId } });
+            const _user = await user.findByPk(req.res.userId);
+            await _user.destroy();
             return res.send();
         } catch (error) {
             return res.status(404).json({ errorMessage: `Erro ao deletar usuario. Erro: ${error}` });
