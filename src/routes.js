@@ -47,10 +47,11 @@ routes.put('/states/:id', StateController.update);
 routes.delete('/states/:id', StateController.destroy);
 
 // USER
-routes.use('/users', [ authMiddleware ]);
 routes.get('/users', UserController.index);
 routes.get('/users/:id', UserController.show);
 routes.post('/users', UserController.store);
+
+routes.use('/users', [ authMiddleware ]); // MIDDLEWARE
 routes.put('/users', UserController.update);
 routes.delete('/users', UserController.destroy);
 
