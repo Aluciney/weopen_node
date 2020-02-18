@@ -18,6 +18,11 @@ module.exports = (sequelize, DataTypes) => {
         company.belongsTo(models.address, {
             foreignKey: 'id_address'
         });
+
+        company.hasMany(models.classification, {
+            foreignKey: 'id_company',
+            as: 'classification'
+        });
     };
 
     sequelizePaginate.paginate(company);

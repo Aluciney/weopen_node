@@ -4,6 +4,7 @@ const authMiddleware = require('./middlewares/auth');
 const AddressController = require('./controllers/AddressController');
 const CityController = require('./controllers/CityController');
 const CompanyController = require('./controllers/CompanyController');
+const ClassificationController = require('./controllers/ClassificationController');
 const CountryController = require('./controllers/CountryController');
 const StateController = require('./controllers/StateController');
 const UserController = require('./controllers/UserController');
@@ -45,6 +46,13 @@ routes.get('/states/:id', StateController.show);
 routes.post('/states', StateController.store);
 routes.put('/states/:id', StateController.update);
 routes.delete('/states/:id', StateController.destroy);
+
+// CLASSIFICATION
+routes.get('/classifications', ClassificationController.index);
+routes.get('/classifications/:id', ClassificationController.show);
+routes.post('/classifications', ClassificationController.store);
+routes.put('/classifications/:id', ClassificationController.update);
+routes.delete('/classifications/:id', ClassificationController.destroy);
 
 // USER
 routes.get('/users', UserController.index);
