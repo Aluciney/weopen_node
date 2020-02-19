@@ -23,7 +23,7 @@ module.exports = {
             }],
         });
         if (_public_chat === null) {
-            return res.status(404).json({ erroMessage: `Companhia não encontrado!` });
+            return res.status(404).json({ errorMessage: `Companhia não encontrado!` });
         }
         return res.status(200).json(_public_chat);
     },

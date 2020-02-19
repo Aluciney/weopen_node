@@ -10,7 +10,7 @@ module.exports = {
     async show(req, res) {
         const addresses = await address.findByPk(req.params.id);
         if (addresses === null) {
-            return res.status(404).json({ erroMessage: `Endereço não encontrado!` });
+            return res.status(404).json({ errorMessage: `Endereço não encontrado!` });
         }
         return res.status(200).json(addresses);
     },
@@ -20,7 +20,7 @@ module.exports = {
             const addresses = await address.create(req.body);
             res.status(201).json(addresses);
         } catch (error) {
-            return res.status(404).json({ erroMessage: `Erro ao cadastrar endereço. Erro: ${error}` });
+            return res.status(404).json({ errorMessage: `Erro ao cadastrar endereço. Erro: ${error}` });
         }
     },
 
@@ -30,9 +30,9 @@ module.exports = {
             if (addresses > 0) {
                 return res.json(await address.findByPk(req.params.id));
             }
-            return res.status(404).json({ erroMessage: `Erro ao atualizar endereço.` });
+            return res.status(404).json({ errorMessage: `Erro ao atualizar endereço.` });
         } catch (error) {
-            return res.status(404).json({ erroMessage: `Erro ao atualizar endereço. Erro: ${error}` });
+            return res.status(404).json({ errorMessage: `Erro ao atualizar endereço. Erro: ${error}` });
         }
     },
 
@@ -41,7 +41,7 @@ module.exports = {
             const addresses = await address.destroy({ where: { id: req.params.id } });
             return res.send();
         } catch (error) {
-            return res.status(404).json({ erroMessage: `Erro ao deletar endereço. Erro: ${error}` });
+            return res.status(404).json({ errorMessage: `Erro ao deletar endereço. Erro: ${error}` });
         }
     }
 };

@@ -10,7 +10,7 @@ module.exports = {
     async show(req, res) {
         const classifications = await classification.findByPk(req.params.id);
         if (classifications === null) {
-            return res.status(404).json({ erroMessage: `Classificação não encontrado!` });
+            return res.status(404).json({ errorMessage: `Classificação não encontrado!` });
         }
         return res.status(200).json(classifications);
     },
@@ -20,7 +20,7 @@ module.exports = {
             const classifications = await classification.create(req.body);
             res.status(201).json(classifications);
         } catch (error) {
-            return res.status(404).json({ erroMessage: `Erro ao cadastrar classificação. Erro: ${error}` });
+            return res.status(404).json({ errorMessage: `Erro ao cadastrar classificação. Erro: ${error}` });
         }
     },
 
@@ -30,9 +30,9 @@ module.exports = {
             if (classifications > 0) {
                 return res.json(await classification.findByPk(req.params.id));
             }
-            return res.status(404).json({ erroMessage: `Erro ao atualizar classificação.` });
+            return res.status(404).json({ errorMessage: `Erro ao atualizar classificação.` });
         } catch (error) {
-            return res.status(404).json({ erroMessage: `Erro ao atualizar classificação. Erro: ${error}` });
+            return res.status(404).json({ errorMessage: `Erro ao atualizar classificação. Erro: ${error}` });
         }
     },
 
@@ -41,7 +41,7 @@ module.exports = {
             const classifications = await classification.destroy({ where: { id: req.params.id } });
             return res.send();
         } catch (error) {
-            return res.status(404).json({ erroMessage: `Erro ao deletar classificação. Erro: ${error}` });
+            return res.status(404).json({ errorMessage: `Erro ao deletar classificação. Erro: ${error}` });
         }
     }
 };
