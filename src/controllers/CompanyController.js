@@ -52,8 +52,7 @@ module.exports = {
             });
         });
 
-        res.status(200).json(result_companies);
-        return res.send();
+        return res.status(200).json(result_companies);
     },
 
     async show(req, res) {
