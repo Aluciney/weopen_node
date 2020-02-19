@@ -12,7 +12,7 @@ module.exports = {
     async show(req, res) {
         const _user = await user.findByPk(req.params.id);
         if (_user === null) {
-            return res.status(404).json({ errorMessage: `Usuário não encontrado!` });
+            return res.status(404).json({ error: `Usuário não encontrado!` });
         }
         return res.status(200).json(_user);
     },
@@ -33,7 +33,7 @@ module.exports = {
 
             return res.status(201).json({ user: _user, token: token });
         } catch (error) {
-            return res.status(404).json({ errorMessage: `Erro ao cadastrar usuario. Erro: ${error}` });
+            return res.status(404).json({ error: `Erro ao cadastrar usuario. Erro: ${error}` });
         }
     },
 
@@ -44,9 +44,9 @@ module.exports = {
                 _user.update(req.body);
                 return res.json(_user);
             }
-            return res.status(404).json({ errorMessage: `Usuário não encontrado.` });
+            return res.status(404).json({ error: `Usuário não encontrado.` });
         } catch (error) {
-            return res.status(404).json({ errorMessage: `Erro ao atualizar usuario. Erro: ${error}` });
+            return res.status(404).json({ error: `Erro ao atualizar usuario. Erro: ${error}` });
         }
     },
 
@@ -56,7 +56,7 @@ module.exports = {
             await _user.destroy();
             return res.send();
         } catch (error) {
-            return res.status(404).json({ errorMessage: `Erro ao deletar usuario. Erro: ${error}` });
+            return res.status(404).json({ error: `Erro ao deletar usuario. Erro: ${error}` });
         }
     }
 };

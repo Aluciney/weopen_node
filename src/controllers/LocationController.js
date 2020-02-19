@@ -39,7 +39,7 @@ module.exports = {
             }
             return res.status(200).json(chats);
         } catch (error) {
-            return res.status(404).json({ errorMessage: `Erro ao verificar endereço. Erro: ${error}` });
+            return res.status(404).json({ error: `Erro ao verificar endereço. Erro: ${error}` });
         }
     },
 

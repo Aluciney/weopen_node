@@ -58,7 +58,7 @@ module.exports = {
     async show(req, res) {
         const companies = await company.findByPk(req.params.id);
         if (companies === null) {
-            return res.status(404).json({ errorMessage: `Companhia não encontrado!` });
+            return res.status(404).json({ error: `Companhia não encontrado!` });
         }
         return res.status(200).json(companies);
     },
@@ -71,7 +71,7 @@ module.exports = {
             });
             return res.status(201).json(companies);
         } catch (error) {
-            return res.status(404).json({ errorMessage: `Erro ao cadastrar companhia. Erro: ${error}` });
+            return res.status(404).json({ error: `Erro ao cadastrar companhia. Erro: ${error}` });
         }
     },
 
@@ -81,9 +81,9 @@ module.exports = {
             if (companies > 0) {
                 return res.json(await company.findByPk(req.params.id));
             }
-            return res.status(404).json({ errorMessage: `Erro ao atualizar companhia.` });
+            return res.status(404).json({ error: `Erro ao atualizar companhia.` });
         } catch (error) {
-            return res.status(404).json({ errorMessage: `Erro ao atualizar companhia. Erro: ${error}` });
+            return res.status(404).json({ error: `Erro ao atualizar companhia. Erro: ${error}` });
         }
     },
 
@@ -92,7 +92,7 @@ module.exports = {
             const companies = await company.destroy({ where: { id: req.params.id } });
             return res.send();
         } catch (error) {
-            return res.status(404).json({ errorMessage: `Erro ao deletar companhia. Erro: ${error}` });
+            return res.status(404).json({ error: `Erro ao deletar companhia. Erro: ${error}` });
         }
     }
 };

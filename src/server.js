@@ -18,16 +18,13 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 io.on('connection', socket => {
-    // console.log('New client connected' + socket.id);
-    //console.log(socket);
 
     socket.on('public_chat', msg => {
-        io.emit('receivedMessage', msg);
+        socket.emit('receivedMessage', msg);
     });
 
-    // disconnect is fired when a client leaves the server
     socket.on('disconnect', () => {
-        // console.log('user disconnected');
+
     });
 });
 

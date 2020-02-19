@@ -15,7 +15,7 @@ module.exports = {
     async show(req, res) {
         const states = await state.findByPk(req.params.id);
         if (states === null) {
-            return res.status(404).json({ errorMessage: `Estado não encontrado!` });
+            return res.status(404).json({ error: `Estado não encontrado!` });
         }
         return res.status(200).json(states);
     },
@@ -25,7 +25,7 @@ module.exports = {
             const states = await state.create(req.body);
             res.status(201).json(states);
         } catch (error) {
-            return res.status(404).json({ errorMessage: `Erro ao cadastrar estado. Erro: ${error}` });
+            return res.status(404).json({ error: `Erro ao cadastrar estado. Erro: ${error}` });
         }
     },
 
@@ -35,9 +35,9 @@ module.exports = {
             if (states > 0) {
                 return res.json(await state.findByPk(req.params.id));
             }
-            return res.status(404).json({ errorMessage: `Erro ao atualizar estado.` });
+            return res.status(404).json({ error: `Erro ao atualizar estado.` });
         } catch (error) {
-            return res.status(404).json({ errorMessage: `Erro ao atualizar estado. Erro: ${error}` });
+            return res.status(404).json({ error: `Erro ao atualizar estado. Erro: ${error}` });
         }
     },
 
@@ -46,7 +46,7 @@ module.exports = {
             const states = await state.destroy({ where: { id: req.params.id } });
             return res.send();
         } catch (error) {
-            return res.status(404).json({ errorMessage: `Erro ao deletar estado. Erro: ${error}` });
+            return res.status(404).json({ error: `Erro ao deletar estado. Erro: ${error}` });
         }
     }
 };

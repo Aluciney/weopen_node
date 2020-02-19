@@ -10,12 +10,12 @@ module.exports = {
         });
         
         if(!user_){
-            return res.status(401).json({ errorMessage: 'E-mail não cadastrado' });
+            return res.status(401).json({ error: 'E-mail não cadastrado' });
         }
 
         const match = await bcrypt.compare(password, user_.password_hash);
         if(!match){
-            return res.status(401).json({ errorMessage: 'Senha inválida' });
+            return res.status(401).json({ error: 'Senha inválida' });
         }
 
         var token = jwt.sign({ 
@@ -32,7 +32,7 @@ module.exports = {
         });
         
         if(!user_){
-            return res.status(401).json({ errorMessage: 'E-mail não cadastrado' });
+            return res.status(401).json({ error: 'E-mail não cadastrado' });
         }
 
         var token = jwt.sign({ 
