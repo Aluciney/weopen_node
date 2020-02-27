@@ -20,7 +20,7 @@ const io = socketIO(server);
 io.on('connection', socket => {
 
     socket.on('public_chat', msg => {
-        socket.emit('receivedMessage', msg);
+        io.emit('receivedMessage', msg);
     });
 
     socket.on('disconnect', () => {
