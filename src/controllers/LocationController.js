@@ -6,37 +6,33 @@ const Op = sequelize.Op;
 module.exports = {
     async show(req, res) {
         try {
-            const _company = await company.findAll(
-                { 
-                    where: { [Op.or]: [{ opening_status: 'O' }, { opening_status: 'P' }] }, 
+            const { latitude, longitude } = req.query;
+            const chats = [];
+            var intersects = sequelize.fn('ST_Intersects', 'POINT(' + longitude + ' ' + latitude +')', sequelize.col('location'));
+            const _company = await company.findOne(
+                {
+                    where: { 
+                        $and: sequelize.where(intersects, true)
+                    }, 
                     include: [{
                         model: address,
                         as: 'address'
                     }],
                 });
-            const { latitude, longitude } = req.query;
-            const location = [ longitude, latitude ];
-            let chats = [];
-            for( var i = 0; i < _company.length; i++){
-                if (isPointInPoly( _company[i].location, location)) {
-                    const { id } = await public_chat.findOne({ where: { id_company: _company[i].id } });
-                    
-                    const chat =
-                    {
-                        id_public_chat: id,
-                        id_company: _company[i].id,
-                        fantasy_name: _company[i].fantasy_name,
-                        address: _company[i].address,
-                        situation: _company[i].opening_status,
-                        open_time: _company[i].open_time,
-                        close_time: _company[i].close_time,
-                        photo_url: _company[i].photo_url,
-                    };
-
-                    chats.push(chat);
-                    break;
-                }
+            if(_company){
+                const { id } = await public_chat.findOne({ where: { id_company: _company.id } });
+                chats.push({
+                    id_public_chat: id,
+                    id_company: _company.id,
+                    fantasy_name: _company.fantasy_name,
+                    address: _company.address,
+                    situation: _company.opening_status,
+                    open_time: _company.open_time,
+                    close_time: _company.close_time,
+                    photo_url: _company.photo_url,
+                });
             }
+
             return res.status(200).json(chats);
         } catch (error) {
             return res.status(404).json({ error: `Erro ao verificar endereço. Erro: ${error}` });

@@ -8,7 +8,10 @@ module.exports = {
     host: process.env.DB_HOST_DEV,
     dialect: process.env.DB_DIALECT_DEV,
     dialectOptions: {
-        ssl: process.env.DB_SSL_DEV
+        ssl: {
+            require: process.env.DB_SSL_DEV,
+            rejectUnauthorized: false,
+        }
     },
     logging: false,
     define: { freezeTableName: true }
@@ -20,7 +23,10 @@ module.exports = {
     host: process.env.DB_HOST_TEST,
     dialect: process.env.DB_DIALECT_TEST,
     dialectOptions: {
-        ssl: process.env.DB_SSL_TEST
+        ssl: {
+            require: process.env.DB_SSL_TEST,
+            rejectUnauthorized: false,
+        }
     },
     logging: false,
     define: { freezeTableName: true }
@@ -32,7 +38,10 @@ module.exports = {
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
     dialectOptions: {
-        ssl: process.env.DB_SSL
+        ssl: {
+            require: process.env.DB_SSL,
+            rejectUnauthorized: false,
+        }
     },
     logging: false,
     define: { freezeTableName: true }

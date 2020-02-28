@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
         cnpj: DataTypes.STRING,
         open_time: DataTypes.TIME,
         close_time: DataTypes.TIME,
-        opening_status: DataTypes.ENUM('O', 'C', 'P'),
-        location: DataTypes.JSON,
+        opening_status: DataTypes.CHAR(1),
+        location: DataTypes.GEOMETRY,
         photo_url: DataTypes.STRING
     }, {});
     company.associate = function (models) {

@@ -33,11 +33,11 @@ module.exports = {
       },
       opening_status: {
         allowNull: false,
-        type: Sequelize.ENUM('O','C','P')
+        type: Sequelize.CHAR(1)
       },
       location: {
         allowNull: false,
-        type: Sequelize.JSON
+        type: Sequelize.GEOMETRY
       },
       photo_url: {
         allowNull: false,
