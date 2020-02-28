@@ -1,7 +1,6 @@
 const { address, company, public_chat } = require('../app/models');
 
 const sequelize = require('sequelize');
-const Op = sequelize.Op;
 
 module.exports = {
     async show(req, res) {
