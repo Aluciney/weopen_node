@@ -17,7 +17,15 @@ module.exports = {
                     as: 'classification'
                 },
             ],
-            where: { fantasy_name: { [Op.like]: `%${search}%` }},
+            where: { 
+                fantasy_name: { [Op.like]: `%${search}%` },
+                opening_status: {
+                    [Op.ne]: 'C',
+                }
+            },
+            order: [
+                ['fantasy_name', 'ASC'],
+            ],
             page,
             paginate: 5,
         });
