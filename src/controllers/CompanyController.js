@@ -18,7 +18,7 @@ module.exports = {
                 },
             ],
             where: { 
-                fantasy_name: { [Op.like]: `%${search}%` },
+                fantasy_name: { [Op.iLike]: `%${search}%` },
                 opening_status: {
                     [Op.ne]: 'C',
                 }
