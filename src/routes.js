@@ -4,6 +4,7 @@ const authMiddleware = require('./middlewares/auth');
 const AddressController = require('./controllers/AddressController');
 const CityController = require('./controllers/CityController');
 const CompanyController = require('./controllers/CompanyController');
+const AdminCompanyController = require('./controllers/AdminCompanyController');
 const ClassificationController = require('./controllers/ClassificationController');
 const CountryController = require('./controllers/CountryController');
 const StateController = require('./controllers/StateController');
@@ -27,11 +28,8 @@ routes.put('/cities/:id', CityController.update);
 routes.delete('/cities/:id', CityController.destroy);
 
 // COMPANY
+routes.use('/companies', [ authMiddleware ]); // MIDDLEWARE
 routes.get('/companies', CompanyController.index);
-routes.get('/companies/:id', CompanyController.show);
-routes.post('/companies', CompanyController.store);
-routes.put('/companies/:id', CompanyController.update);
-routes.delete('/companies/:id', CompanyController.destroy);
 
 // COUNTRY
 routes.get('/countries', CountryController.index);
@@ -68,6 +66,12 @@ routes.post('/authentication/login', AuthenticationController.login);
 routes.post('/authentication/login/google', AuthenticationController.login_google);
 routes.post('/authentication/register', AuthenticationController.register);
 
+// PAINEL ADMIN COMPANY
+routes.get('/admin/companies', AdminCompanyController.index);
+routes.get('/admin/companies/:id', AdminCompanyController.show);
+routes.post('/admin/companies', AdminCompanyController.store);
+routes.put('/admin/companies/:id', AdminCompanyController.update);
+routes.delete('/admin/companies/:id', AdminCompanyController.destroy);
 
 routes.use('/location', [ authMiddleware ]);
 routes.get('/location', LocationController.show);
